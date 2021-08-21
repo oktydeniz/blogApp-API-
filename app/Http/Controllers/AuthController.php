@@ -65,4 +65,25 @@ class AuthController extends Controller
 
         return response($response,201);
     }
+
+    public function saveInfo(Request $request){
+        $user= User::find(Auth::user()->id);
+        $user->name = $request->name;
+        $user->lastName =$request->lastName;
+        $photo = '';
+        if($request->photo!==''){
+            $photo = time().'.jpg';
+            file_put_contents('storage/profiles/',$photo,base64_decode($request->photo));
+            $user->photo = $photo;
+
+        }
+        $user->update();
+
+        return response()->json([
+            'success' => true,
+            'photo'=>$photo,
+            
+        ]);
+
+    }
 }
