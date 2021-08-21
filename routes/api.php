@@ -23,6 +23,8 @@ Route::post('login',[AuthController::class,'loginAction']);
 
 Route::group(['middleware'=> ['auth:sanctum']],function(){
 
+    //infos
+    Route::post('saveUserInfo',[AuthController::class,'saveInfo']);
     //auth
     Route::post('logout',[AuthController::class,'logoutAction']);
 
