@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -71,18 +72,18 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->lastName =$request->lastName;
         $photo = '';
-        if($request->photo!==''){
+        //check if user provided photo
+        if($request->photo!=''){
+            // user time for photo name to prevent name duplication
             $photo = time().'.jpg';
-            file_put_contents('storage/profiles/',$photo,base64_decode($request->photo));
+            // decode photo string and save to storage/profiles
+            file_put_contents('storage/profiles/'.$photo,base64_decode($request->photo));
             $user->photo = $photo;
-
         }
         $user->update();
-
         return response()->json([
             'success' => true,
-            'photo'=>$photo,
-            
+            'photo'=>$request->photo
         ]);
 
     }
