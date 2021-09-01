@@ -16,7 +16,7 @@ class PostController extends Controller
         $post->desc = $request->desc;
 
         if($request->photo != ''){
-            $photo = time().'jpg';
+            $photo = time().'.jpg';
             file_put_contents('storage/posts/'.$photo,base64_decode($request->photo));
             $post->photo = $photo;
         }
@@ -31,7 +31,7 @@ class PostController extends Controller
     }
     public function update(Request $request){
         $post = Post::find($request->id);
-        if(Auth::user()->id != $request->id){
+        if(Auth::user()->id != $post->user_id){
             return response()->json([
                 'success' => false,
                 'message'=>'unauthorized access'
@@ -48,14 +48,14 @@ class PostController extends Controller
     }
     public function delete(Request $request){
         $post = Post::find($request->id);
-        if(Auth::user()->id != $request->id){
+        if(Auth::user()->id != $post->user_id){
             return response()->json([
                 'success' => false,
                 'message'=>'unauthorized access'
             ]);
         }
         if($post->photo != ''){
-            Storage::delete('public/posts'.$post->photo);
+            Storage::delete('public/posts/'.$post->photo);
 
         }
         $post->delete();
