@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,8 +44,6 @@ class PostController extends Controller
             'success' => true,
             'message'=>'post edited'
         ]);
-
-
     }
     public function delete(Request $request){
         $post = Post::find($request->id);
@@ -63,8 +62,6 @@ class PostController extends Controller
             'success' => true,
             'message'=>'post deleted'
         ]);
-        
-
     }
     public function posts(){
         $posts = Post::orderBy('id','desc')->get();
