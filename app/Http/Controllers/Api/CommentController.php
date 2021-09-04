@@ -17,7 +17,7 @@ class CommentController extends Controller
         $comment->save();
 
         return response()->json([
-            'succeed' => true,
+            'success' => true,
             'message' =>'comment added'
         ]);
     }
@@ -42,7 +42,7 @@ class CommentController extends Controller
 
         if($comment->user_id != Auth::user()->id){
             return response()->json([
-                'succeed' =>false,
+                'success' =>false,
                 'message' =>'unauthorize access'
             ]);
 
@@ -50,7 +50,7 @@ class CommentController extends Controller
         $comment->delete();
 
         return response()->json([
-            'succeed' =>true,
+            'success' =>true,
             'message' =>'comment delete'
         ]);
 
@@ -64,7 +64,7 @@ class CommentController extends Controller
 
         }
         return response()->json([
-            'succeed' =>true,
+            'success' =>true,
             'comments'=>$comment,
         ]);
     }
