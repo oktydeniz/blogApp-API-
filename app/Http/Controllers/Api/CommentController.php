@@ -58,14 +58,14 @@ class CommentController extends Controller
 
     public function comments(Request $request){
 
-        $comment = Comment::where('post_id',$request->id)->get();
-        foreach($comment as $comment){
+        $comments = Comment::where('post_id',$request->id)->get();
+        foreach($comments as $comment){
             $comment->user;
 
         }
         return response()->json([
             'success' =>true,
-            'comments'=>$comment,
+            'comments'=>$comments,
         ]);
     }
 }
