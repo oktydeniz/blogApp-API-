@@ -15,9 +15,12 @@ class CommentController extends Controller
         $comment->post_id = $request->post_id;
         $comment->comment =$request->comment;
         $comment->save();
+        $comment->user;
+
 
         return response()->json([
             'success' => true,
+            'comment' => $comment,
             'message' =>'comment added'
         ]);
     }
