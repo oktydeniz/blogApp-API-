@@ -26,13 +26,14 @@ Route::group(['middleware'=> ['auth:sanctum']],function(){
     //infos
     Route::post('saveUserInfo',[AuthController::class,'saveInfo']);
     //auth
-    Route::post('logout',[AuthController::class,'logoutAction']);
+    Route::post('/logout',[AuthController::class,'logoutAction']);
 
     //post
     Route::post('/posts/create', [PostController::class,'create']);
     Route::post('/posts/delete', [PostController::class,'delete']);
     Route::post('/posts/update', [PostController::class,'update']);
     Route::get('/posts', [PostController::class,'posts']);
+    Route::get('/posts/my_posts',[PostController::class,'myposts']);
 
     //comments
     Route::post('comments/create',[CommentController::class,'create']);
