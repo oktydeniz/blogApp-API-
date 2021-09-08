@@ -80,7 +80,7 @@ class AuthController extends Controller
         $user->update();
         return response()->json([
             'success' => true,
-            'photo'=>$request->photo
+            'photo'=>$photo
         ]);
 
     }
